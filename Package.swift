@@ -1,3 +1,5 @@
+// swift-tools-version:4.2
+
 import PackageDescription
 
 let pkg = Package(name: "PromiseKit")
