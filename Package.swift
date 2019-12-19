@@ -1,10 +1,10 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.1
 
 import PackageDescription
 
 let pkg = Package(name: "PromiseKit")
 pkg.platforms = [
-   .macOS(.v10_10), .iOS(.v8), .tvOS(.v9), .watchOS(.v2)
+   .macOS(.v10_15)
 ]
 pkg.products = [
     .library(name: "PromiseKit", targets: ["PromiseKit"]),
