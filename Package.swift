@@ -1,22 +1,41 @@
 import PackageDescription
 
-let package = Package(
-    name: "PromiseKit",
-    exclude: [
-        "Sources/AnyPromise.swift",
-        "Sources/Promise+AnyPromise.swift",
-        "Sources/AnyPromise.m",
-        "Sources/dispatch_promise.m",
-        "Sources/GlobalState.m",
-        "Sources/hang.m",
-        "Sources/NSMethodSignatureForBlock.m",
-        "Sources/join.m",
-        "Sources/PMKCallVariadicBlock.m",
-        "Sources/when.m",
-        "Sources/after.m",
-        "Sources/AnyPromise+Private.h",
-        "Sources/AnyPromise.h",
-        "Sources/PromiseKit.h",
-        "Tests"
-    ]
-)
+let pkg = Package(name: "PromiseKit")
+pkg.platforms = [
+   .macOS(.v10_10), .iOS(.v8), .tvOS(.v9), .watchOS(.v2)
+]
+pkg.products = [
+    .library(name: "PromiseKit", targets: ["PromiseKit"]),
+]
+
+let pmk: Target = .target(name: "PromiseKit")
+pmk.path = "Sources"
+pmk.exclude = [
+    "AnyPromise.swift",
+    "Promise+AnyPromise.swift",
+    "dispatch_promise.m",
+    "GlobalState.m",
+    "AnyPromise.m",
+    "PMKCallVariadicBlock.m",
+    "dispatch_promise.m",
+    "join.m",
+    "when.m",
+    "NSMethodSignatureForBlock.m",
+    "after.m",
+    "hang.m",
+    "race.m",
+    "Deprecations.swift",
+    "hang.m",
+    "NSMethodSignatureForBlock.m",
+    "join.m",
+    "AnyPromise+Private.h",
+    "AnyPromise.h",
+    "PromiseKit.h",
+    "Tests"
+]
+pkg.swiftLanguageVersions = [.v4, .v4_2, .v5]
+pkg.targets = [
+    pmk,
+    .testTarget(name: "A+", dependencies: ["PromiseKit"]),
+    .testTarget(name: "CorePromise", dependencies: ["PromiseKit"], path: "Tests/CorePromise"),
+]
